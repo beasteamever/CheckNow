@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2000
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckNow", "CheckNow\CheckNow.csproj", "{DE3B0643-8C55-4D5A-894A-32ACFAE8E98D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DE3B0643-8C55-4D5A-894A-32ACFAE8E98D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE3B0643-8C55-4D5A-894A-32ACFAE8E98D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE3B0643-8C55-4D5A-894A-32ACFAE8E98D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE3B0643-8C55-4D5A-894A-32ACFAE8E98D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BDFCC6C9-D147-43FA-A212-784F84AC01B4}
+	EndGlobalSection
+EndGlobal

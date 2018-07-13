@@ -4,6 +4,11 @@
              xmlns:local="clr-namespace:CheckNow"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Views\Resources\ButtonsDictionary.xaml"/>
+                <ResourceDictionary Source="Views\Resources\ColorsDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

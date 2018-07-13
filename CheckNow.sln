@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27703.2000
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckNow", "CheckNow\CheckNow.csproj", "{DE3B0643-8C55-4D5A-894A-32ACFAE8E98D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SweetControls", "SweetControls\SweetControls.csproj", "{4CDCCD53-A250-4D6F-AC43-5F646F92D664}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,14 @@ Global
 		{DE3B0643-8C55-4D5A-894A-32ACFAE8E98D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE3B0643-8C55-4D5A-894A-32ACFAE8E98D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE3B0643-8C55-4D5A-894A-32ACFAE8E98D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EABF2DBE-03F3-4BE8-965D-C850562643C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EABF2DBE-03F3-4BE8-965D-C850562643C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EABF2DBE-03F3-4BE8-965D-C850562643C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EABF2DBE-03F3-4BE8-965D-C850562643C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CDCCD53-A250-4D6F-AC43-5F646F92D664}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CDCCD53-A250-4D6F-AC43-5F646F92D664}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CDCCD53-A250-4D6F-AC43-5F646F92D664}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CDCCD53-A250-4D6F-AC43-5F646F92D664}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

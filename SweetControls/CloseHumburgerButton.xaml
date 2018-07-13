@@ -1,0 +1,112 @@
+﻿<Button x:Class="SweetControls.CloseHumburgerButton"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        x:Name="main"
+        mc:Ignorable="d"
+        d:DesignHeight="450" d:DesignWidth="800">
+    <Button.Style>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                Background="{TemplateBinding Background}">
+                            <ContentPresenter/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Button.Style>
+
+    <Button.Resources>
+        <Storyboard x:Key="Open">
+            <!--Top line-->
+            <DoubleAnimation Storyboard.TargetName="TopLine"
+                             Storyboard.TargetProperty="(Canvas.Top)"
+                             Duration="0:0:0.3"
+                             From="{Binding ElementName=TopLine, Path=Canvas.Top}"
+                             To="0"/>
+
+            <DoubleAnimation Storyboard.TargetName="TopLine"
+                             Storyboard.TargetProperty="Opacity"
+                             Duration="0:0:0.2"
+                             From="{Binding ElementName=TopLine, Path=Opacity}"
+                             To="0"/>
+            <!--Middle Line-->
+            <DoubleAnimation Storyboard.TargetName="MiddleLine"
+                             Storyboard.TargetProperty="(Line.RenderTransform).(RotateTransform.Angle)"
+                             Duration="0:0:0.3"
+                             From="{Binding ElementName=MiddleLine, Path=RenderTransform.RotateTransform.Angle}"
+                             To="45"/>
+
+            <!--Bottom Line-->
+            <DoubleAnimation Storyboard.TargetName="BottomLine"
+                             Storyboard.TargetProperty="(Line.RenderTransform).(RotateTransform.Angle)"
+                             Duration="0:0:0.3"
+                             From="{Binding ElementName=BottomLine, Path=RenderTransform.RotateTransform.Angle}"
+                             To="-45"/>
+        </Storyboard>
+
+        <Storyboard x:Key="Close">
+            <!--Top line-->
+
+            <DoubleAnimation Storyboard.TargetName="TopLine"
+                             Storyboard.TargetProperty="Opacity"
+                             Duration="0:0:0.2"
+                             From="{Binding ElementName=TopLine, Path=Opacity}"
+                             To="1"/>
+            <!--Middle Line-->
+            <DoubleAnimation Storyboard.TargetName="MiddleLine"
+                             Storyboard.TargetProperty="(Line.RenderTransform).(RotateTransform.Angle)"
+                             Duration="0:0:0.3"
+                             From="{Binding ElementName=MiddleLine, Path=RenderTransform.RotateTransform.Angle}"
+                             To="0"/>
+
+            <!--Bottom Line-->
+            <DoubleAnimation Storyboard.TargetName="BottomLine"
+                             Storyboard.TargetProperty="(Line.RenderTransform).(RotateTransform.Angle)"
+                             Duration="0:0:0.3"
+                             From="{Binding ElementName=BottomLine, Path=RenderTransform.RotateTransform.Angle}"
+                             To="0"/>
+
+        </Storyboard>
+    </Button.Resources>
+    <Canvas x:Name="bodey">
+        <Line X2="30"
+              Canvas.Left="10"
+              Canvas.Top="15"
+              Stretch="Fill"
+              Stroke="Black"
+              x:Name="TopLine"/>
+
+        <Line X2="30"
+              Canvas.Left="10"
+              Canvas.Top="25"
+              Stretch="Fill"
+              Stroke="Black"
+              x:Name="MiddleLine"
+              RenderTransformOrigin="0.5, 0.5">
+            <Line.RenderTransform>
+                <RotateTransform Angle="0"/>
+            </Line.RenderTransform>
+        </Line>
+
+        <Line X2="30"
+              Canvas.Left="10"
+              Canvas.Top="35"
+              Stretch="Fill"
+              Stroke="Black"
+              x:Name="BottomLine"
+              RenderTransformOrigin="0.5, 0.5">
+            <Line.RenderTransform>
+                <RotateTransform Angle="0"/>
+            </Line.RenderTransform>
+        </Line>
+    </Canvas>
+</Button>

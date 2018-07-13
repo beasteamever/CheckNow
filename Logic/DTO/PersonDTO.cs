@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-namespace Storage.Models
+
+namespace Logic.DTO
 {
-   public class Person
+    public class PersonDTO
     {
         [Key]
         public int Id { get; set; }
@@ -12,9 +13,9 @@ namespace Storage.Models
         public string Phone { get; set; }
 
         public string TeamName { get; set; }
-        public Team Team { get; set; }
+        public TeamDTO Team { get; set; }
 
-        public virtual IEnumerable<Task> Tasks { get; set; }
+        public virtual IEnumerable<TaskDTO> Tasks { get; set; }
 
         [Required, MinLength(4), MaxLength(16)]
         public string Login { get; set; }

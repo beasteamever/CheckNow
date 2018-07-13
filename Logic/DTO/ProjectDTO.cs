@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Storage.Models
+namespace Logic.DTO
 {
-   public class Project
+    public class ProjectDTO
     {
         [Key]
         public int ProjectId { get; set; }
@@ -22,14 +22,15 @@ namespace Storage.Models
         public string Info { get; set; }
         [ForeignKey("Person")]
         public string projectManager { get; set; }
-        public Person Person { get; set; }
+        public PersonDTO Person { get; set; }
         [ForeignKey("Customer")]
         public string CustomerName { get; set; }
-        public Customer Customer { get; set; }
+        public CustomerDTO Customer { get; set; }
         [ForeignKey("Team")]
         public string TeamName { get; set; }
-        public Team Team { get; set; }
+        public TeamDTO Team { get; set; }
 
-        public virtual IEnumerable<Feature> FeatureId { get; set; }
+        public virtual IEnumerable<FeatureDTO> FeatureId { get; set; }
+
     }
 }

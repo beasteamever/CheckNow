@@ -2,9 +2,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Storage.Models
+namespace Logic.DTO
 {
-   public class Feature
+    public class FeatureDTO
     {
         [Key]
         public int FeatureId { get; set; }
@@ -13,7 +13,7 @@ namespace Storage.Models
         public string Info { get; set; }
         [ForeignKey("Project")]
         public int ProjectId { get; set; }
-        public Project Project { get; set; }
-        public virtual IEnumerable<Task> TaskId { get; set; }
+        public ProjectDTO Project { get; set; }
+        public virtual IEnumerable<TaskDTO> TaskId { get; set; }
     }
 }

@@ -30,6 +30,6 @@ namespace Storage.Models
         public string TeamName { get; set; }
         public Team Team { get; set; }
 
-        public virtual IEnumerable<Feature> FeatureId { get; set; }
+        public virtual ICollection<Feature> FeatureId { get; set; }
     }
 }

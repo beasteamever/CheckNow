@@ -30,7 +30,7 @@ namespace Logic.DTO
         public string TeamName { get; set; }
         public TeamDTO Team { get; set; }
 
-        public virtual IEnumerable<FeatureDTO> FeatureId { get; set; }
+        public virtual ICollection<FeatureDTO> FeatureId { get; set; }
 
     }
 }

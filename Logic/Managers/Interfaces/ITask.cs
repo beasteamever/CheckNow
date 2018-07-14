@@ -5,6 +5,6 @@ namespace Logic.Managers.Interfaces
     public interface ITask
     {
         void Add(TaskDTO DTO);
-        TaskDTO Edit(TaskDTO DTO);
+        void Edit(TaskDTO DTO);
     }
 }

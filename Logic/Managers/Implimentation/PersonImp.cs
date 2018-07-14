@@ -26,10 +26,10 @@ namespace Logic.Managers.Implimentation
 
         }
 
-        public void DeletePerson(int id)
+        public void DeletePerson(PersonDTO DTO)
         {
 
-            var person = db.Person.Where(p => p.Id == id).FirstOrDefault();
+            var person = db.Person.Where(p => p.Id == DTO.Id).FirstOrDefault();
             db.Person.Remove(person);
             db.SaveChanges();
         }
@@ -46,8 +46,11 @@ namespace Logic.Managers.Implimentation
 
         public IEnumerable<PersonDTO> GetAllPerson()
         {
-            
-
+            var persons = db.Person.Select(p => new PersonDTO
+            {
+                Name = p.Name
+            });
+            return persons;
         }
 
         public IEnumerable<PersonDTO> GetAllPersonByTeam(string team)
@@ -63,25 +66,28 @@ namespace Logic.Managers.Implimentation
             return person;
 
         }
-        //доделать
-        public PersonDTO GetAllTaskOnePerson(int id)
+
+        public PersonDTO GetAllTaskOnePerson(PersonDTO DTO)
         {
-            var person = db.Person.Find(id);
-            return new PersonDTO { };
+            PersonDTO dTO = new PersonDTO { };
+            var person = db.Person.Find(DTO.Id);
+            foreach (var I in person.Tasks)
+            { dTO.Tasks.Add(new TaskDTO { Name = I.Name }); }
+            return dTO;
 
         }
 
-        public PersonDTO GetInfoOnePersonbyID(int id)
+        public PersonDTO GetInfoOnePersonbyID(PersonDTO DTO)
         {
-            var person = db.Person.Find(id);
+            var person = db.Person.Find(DTO.Id);
             return new PersonDTO { Name = person.Name, Mail = person.Mail, Phone = person.Phone, TeamName= person.TeamName };
 
 
         }
 
-        public PersonDTO GetLoginByID(int id)
+        public PersonDTO GetLoginByID(PersonDTO DTO)
         {
-            var person = db.Person.Find(id);
+            var person = db.Person.Find(DTO.Id);
             return new PersonDTO { Login = person.Login };
 
         }

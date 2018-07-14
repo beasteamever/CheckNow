@@ -2,22 +2,24 @@
 using System.Collections.Generic;
 using Logic.DTO;
 using Logic.Managers.Interfaces;
-using Storage;
+using Storage.Models;
 
 namespace Logic.Managers.Implimentation
 {
     class CustomerImp : ICustomer
     {
         private readonly Context db;
+        Customer Customer;
 
         public CustomerDTO GetInfo(int id)
         {
-            throw new NotImplementedException();
+            Customer = db.Customer.Find(id);
+            return new CustomerDTO { Name = Customer.Name, Country = Customer.Country, ContactInfo = Customer.ContactInfo };
         }
 
-        public CustomerDTO SetProjects()
+        public void SetProjects()
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

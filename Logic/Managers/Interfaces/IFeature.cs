@@ -7,6 +7,7 @@ namespace Logic.Managers.Interfaces
     {
         void Add(FeatureDTO DTO);
         void Edit(FeatureDTO DTO);
-        IEnumerable<FeatureDTO> GetTasks();
+        void Delete(FeatureDTO DTO);
+        FeatureDTO GetTasks(FeatureDTO DTO);
     }
 }

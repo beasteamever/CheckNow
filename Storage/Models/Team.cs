@@ -10,8 +10,8 @@ namespace Storage.Models
         [Required, MinLength(4), MaxLength(30)]
         public string Name { get; set; }
 
-        public virtual IEnumerable<Project> Projects { get; set; }
+        public virtual ICollection<Project> Projects { get; set; }
 
-        public virtual IEnumerable<Person> Persons { get; set; }
+        public virtual ICollection<Person> Persons { get; set; }
     }
 }

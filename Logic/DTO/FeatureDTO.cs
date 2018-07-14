@@ -14,6 +14,6 @@ namespace Logic.DTO
         [ForeignKey("Project")]
         public int ProjectId { get; set; }
         public ProjectDTO Project { get; set; }
-        public virtual IEnumerable<TaskDTO> TaskId { get; set; }
+        public virtual ICollection<TaskDTO> TaskId { get; set; }
     }
 }

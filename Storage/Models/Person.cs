@@ -14,7 +14,7 @@ namespace Storage.Models
         public string TeamName { get; set; }
         public Team Team { get; set; }
 
-        public virtual IEnumerable<Task> Tasks { get; set; }
+        public virtual ICollection<Task> Tasks { get; set; }
 
         [Required, MinLength(4), MaxLength(16)]
         public string Login { get; set; }

@@ -5,13 +5,13 @@ namespace Logic.Managers.Interfaces
 {
     public interface IPerson
     {
-        PersonDTO GetInfoOnePersonbyID(int id);
+        PersonDTO GetInfoOnePersonbyID(PersonDTO DTO);
         IEnumerable<PersonDTO> GetAllPerson();
         IEnumerable<PersonDTO> GetAllPersonByTeam(string team);
         void AddPerson(PersonDTO DTO);
-        void DeletePerson(int id);
-        PersonDTO GetAllTaskOnePerson(int id);
-        PersonDTO GetLoginByID(int id);
+        void DeletePerson(PersonDTO DTO);
+        PersonDTO GetAllTaskOnePerson(PersonDTO DTO);
+        PersonDTO GetLoginByID(PersonDTO DTO);
         void Edit(PersonDTO DTO);
 
     }

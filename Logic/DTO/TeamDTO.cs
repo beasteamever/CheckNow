@@ -10,8 +10,8 @@ namespace Logic.DTO
         [Required, MinLength(4), MaxLength(30)]
         public string Name { get; set; }
 
-        public virtual IEnumerable<ProjectDTO> Projects { get; set; }
+        public virtual ICollection<ProjectDTO> Projects { get; set; }
 
-        public virtual IEnumerable<PersonDTO> Persons { get; set; }
+        public virtual ICollection<PersonDTO> Persons { get; set; }
     }
 }

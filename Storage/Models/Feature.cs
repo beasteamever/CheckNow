@@ -14,6 +14,6 @@ namespace Storage.Models
         [ForeignKey("Project")]
         public int ProjectId { get; set; }
         public Project Project { get; set; }
-        public virtual IEnumerable<Task> TaskId { get; set; }
+        public virtual ICollection<Task> TaskId { get; set; }
     }
 }

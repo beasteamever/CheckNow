@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using Logic.DTO;
 
-namespace Logic.Managers.IRepository
+namespace Logic.Managers.Interfaces
 {
-    public interface IFeatureRep<FeatureDTO> where FeatureDTO : class
+    public interface IFeature
     {
         void Add(FeatureDTO DTO);
         void Edit(FeatureDTO DTO);

@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using Logic.DTO;
 
-namespace Logic.Managers.IRepository
+namespace Logic.Managers.Interfaces
 {
-    public interface ITeamRep<TeamDTO> where TeamDTO : class
+    public interface ITeam
     {
         TeamDTO GetByID(int id);
         void SetProject(string project);

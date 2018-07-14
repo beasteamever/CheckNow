@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
+using Logic.DTO;
 
-namespace Logic.Managers.IRepository
+namespace Logic.Managers.Interfaces
 {
-    public interface IPersonRep<PersonDTO> where PersonDTO : class
+    public interface IPerson
     {
         PersonDTO GetInfoOnePersonbyID(int id);
         IEnumerable<PersonDTO> GetAllPerson();
@@ -13,7 +12,7 @@ namespace Logic.Managers.IRepository
         void DeletePerson(int id);
         PersonDTO GetAllTaskOnePerson(int id);
         PersonDTO GetLoginByID(int id);
-        PersonDTO Edit(PersonDTO DTO);
+        void Edit(PersonDTO DTO);
 
     }
 }

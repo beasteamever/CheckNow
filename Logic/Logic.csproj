@@ -53,16 +53,25 @@
     <Compile Include="DTO\ProjectDTO.cs" />
     <Compile Include="DTO\TaskDTO.cs" />
     <Compile Include="DTO\TeamDTO.cs" />
-    <Compile Include="Managers\IRepository\ICustomerRep.cs" />
-    <Compile Include="Managers\IRepository\IFeatureRep.cs" />
-    <Compile Include="Managers\IRepository\IPersonRep.cs" />
-    <Compile Include="Managers\IRepository\IProjectRep.cs" />
-    <Compile Include="Managers\IRepository\ITaskRep.cs" />
-    <Compile Include="Managers\IRepository\ITeamRep.cs" />
+    <Compile Include="Managers\Implimentation\CustomerImp.cs" />
+    <Compile Include="Managers\Implimentation\FeatureImp.cs" />
+    <Compile Include="Managers\Implimentation\PersonImp.cs" />
+    <Compile Include="Managers\Implimentation\ProjectImp.cs" />
+    <Compile Include="Managers\Implimentation\TaskImp.cs" />
+    <Compile Include="Managers\Implimentation\TeamImp.cs" />
+    <Compile Include="Managers\Interfaces\ICustomer.cs" />
+    <Compile Include="Managers\Interfaces\IFeature.cs" />
+    <Compile Include="Managers\Interfaces\IPerson.cs" />
+    <Compile Include="Managers\Interfaces\IProject.cs" />
+    <Compile Include="Managers\Interfaces\ITask.cs" />
+    <Compile Include="Managers\Interfaces\ITeam.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Managers\Repository\" />
+    <ProjectReference Include="..\Storage\Storage.csproj">
+      <Project>{88b5026a-2bfa-404a-8f85-f0f010797acc}</Project>
+      <Name>Storage</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

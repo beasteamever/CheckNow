@@ -1,6 +1,8 @@
-﻿namespace Logic.Managers.IRepository
+﻿using Logic.DTO;
+
+namespace Logic.Managers.Interfaces
 {
-    public interface IProjectRep<ProjectDTO> where ProjectDTO : class
+    public interface IProject
     {
         void GetInfoByProjectID(ProjectDTO DTO); //!info, features
         void Delete(int id);

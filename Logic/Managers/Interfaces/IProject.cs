@@ -4,8 +4,8 @@ namespace Logic.Managers.Interfaces
 {
     public interface IProject
     {
-        ProjectDTO GetInfoByProjectID(ProjectDTO DTO); //!info, features
-        void Delete(ProjectDTO DTO);
+        ProjectDTO GetInfoByProjectID(int id); //!info, features
+        void Delete(int id);
         void CreateProject(ProjectDTO DTO);
         void EditProject(ProjectDTO DTO);
 

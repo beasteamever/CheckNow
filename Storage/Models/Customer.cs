@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text;
+
 namespace Storage.Models
 {
    public class Customer
@@ -7,9 +9,9 @@ namespace Storage.Models
         [Key]
         public int Id { get; set; }
         [Required]
-        public string Name { get; set; }
-        public string Country { get; set; }
+        public StringBuilder  Name { get; set; }
+        public StringBuilder  Country { get; set; }
         [Required]
-        public IEnumerable<string> ContactInfo { get; set; }        
+        public IEnumerable<StringBuilder > ContactInfo { get; set; }        
     }
 }

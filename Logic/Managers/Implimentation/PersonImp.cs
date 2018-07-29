@@ -4,6 +4,7 @@ using Logic.DTO;
 using Logic.Managers.Interfaces;
 using Storage.Models;
 using System.Linq;
+using System.Text;
 
 namespace Logic.Managers.Implimentation
 {
@@ -19,6 +20,7 @@ namespace Logic.Managers.Implimentation
                 Name = DTO.Name,
                 Mail = DTO.Mail,
                 Phone = DTO.Phone,
+                Picture = DTO.Picture
 
             };
             db.Person.Add(Person);
@@ -26,10 +28,10 @@ namespace Logic.Managers.Implimentation
 
         }
 
-        public void DeletePerson(PersonDTO DTO)
+        public void DeletePerson(int id)
         {
 
-            var person = db.Person.Where(p => p.Id == DTO.Id).FirstOrDefault();
+            var person = db.Person.Find(id);
             db.Person.Remove(person);
             db.SaveChanges();
         }
@@ -39,7 +41,8 @@ namespace Logic.Managers.Implimentation
             Person = db.Person.Find(DTO.Id);
             Person.Name = DTO.Name;
             Person.Mail = DTO.Mail;
-            Person.Phone = DTO.Phone;            
+            Person.Phone = DTO.Phone;
+            Person.Picture = DTO.Picture;
             db.SaveChanges();
 
         }
@@ -53,7 +56,7 @@ namespace Logic.Managers.Implimentation
             return persons;
         }
 
-        public IEnumerable<PersonDTO> GetAllPersonByTeam(string team)
+        public IEnumerable<PersonDTO> GetAllPersonByTeam(StringBuilder team)
         {
             var person = db.Person.Where(p => p.TeamName == team).
                  Select(p => new PersonDTO
@@ -67,29 +70,42 @@ namespace Logic.Managers.Implimentation
 
         }
 
-        public PersonDTO GetAllTaskOnePerson(PersonDTO DTO)
+        public PersonDTO GetAllTaskOnePerson(int id)
         {
             PersonDTO dTO = new PersonDTO { };
-            var person = db.Person.Find(DTO.Id);
+            var person = db.Person.Find(id);
             foreach (var I in person.Tasks)
             { dTO.Tasks.Add(new TaskDTO { Name = I.Name }); }
             return dTO;
 
         }
 
-        public PersonDTO GetInfoOnePersonbyID(PersonDTO DTO)
+        public PersonDTO GetInfoOnePersonbyID(int id)
         {
-            var person = db.Person.Find(DTO.Id);
+            var person = db.Person.Find(id);
             return new PersonDTO { Name = person.Name, Mail = person.Mail, Phone = person.Phone, TeamName= person.TeamName };
 
 
         }
 
-        public PersonDTO GetLoginByID(PersonDTO DTO)
+        public PersonDTO GetLoginByID(int id)
         {
-            var person = db.Person.Find(DTO.Id);
+            var person = db.Person.Find(id);
             return new PersonDTO { Login = person.Login };
 
+        }
+
+        public StringBuilder GetPicture(int id)
+        {
+            var person = db.Person.Find(id);
+            return person.Picture;
+        }
+
+        public void SetPicture(int id, StringBuilder pic)
+        {
+            Person = db.Person.Find(id);
+            Person.Picture = pic;
+            db.SaveChanges();
         }
     }
 }

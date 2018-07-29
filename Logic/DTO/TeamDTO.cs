@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text;
 
 namespace Logic.DTO
 {
@@ -8,7 +9,7 @@ namespace Logic.DTO
         [Key]
         public int Id { get; set; }
         [Required, MinLength(4), MaxLength(30)]
-        public string Name { get; set; }
+        public StringBuilder  Name { get; set; }
 
         public virtual ICollection<ProjectDTO> Projects { get; set; }
 

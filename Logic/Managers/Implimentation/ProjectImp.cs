@@ -32,9 +32,9 @@ namespace Logic.Managers.Implimentation
             db.SaveChanges();
         }
 
-        public void Delete(ProjectDTO DTO)
+        public void Delete(int id)
         {
-            var project = db.Project.Find(DTO.ProjectId);
+            var project = db.Project.Find(id);
             db.Project.Remove(project);
 
             db.SaveChanges();
@@ -57,9 +57,9 @@ namespace Logic.Managers.Implimentation
             db.SaveChanges();
         }
 
-        public ProjectDTO GetInfoByProjectID(ProjectDTO DTO)
+        public ProjectDTO GetInfoByProjectID(int id)
         {
-            Project = db.Project.Find(DTO.ProjectId);
+            Project = db.Project.Find(id);
             return new ProjectDTO
             {
                 ProjectId = Project.ProjectId,

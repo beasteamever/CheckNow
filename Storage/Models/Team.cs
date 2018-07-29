@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text;
 
 namespace Storage.Models
 {
@@ -8,7 +9,7 @@ namespace Storage.Models
         [Key]
         public int Id { get; set; }
         [Required, MinLength(4), MaxLength(30)]
-        public string Name { get; set; }
+        public StringBuilder  Name { get; set; }
 
         public virtual ICollection<Project> Projects { get; set; }
 

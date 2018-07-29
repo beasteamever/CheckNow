@@ -33,9 +33,9 @@ namespace Logic.Managers.Implimentation
             db.SaveChanges();
         }
 
-        public void Delete(FeatureDTO DTO)
+        public void Delete(int id)
         {
-            var feature = db.Feature.Find(DTO.FeatureId);
+            var feature = db.Feature.Where(f=> f.FeatureId == id).FirstOrDefault();
             db.Feature.Remove(feature);
             db.SaveChanges();
         }

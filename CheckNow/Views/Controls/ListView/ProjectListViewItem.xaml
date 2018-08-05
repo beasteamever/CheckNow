@@ -1,0 +1,98 @@
+﻿<Border x:Class="CheckNow.Views.ProjectListViewItem"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:CheckNow.Views"
+        mc:Ignorable="d" Name="main" MouseLeftButtonDown="Clicked"
+        d:DesignHeight="450" d:DesignWidth="800"
+        Background="White">
+    <Border.Resources>
+        <Storyboard x:Key="Open">
+            <DoubleAnimation Storyboard.TargetName="basement"
+                             Storyboard.TargetProperty="Height"
+                             Duration="0:0:0.2"
+                             From="{Binding ElementName=basement, Path=Height}"
+                             To="100"/>
+        </Storyboard>
+        <Storyboard x:Key="Close">
+            <DoubleAnimation Storyboard.TargetName="basement"
+                             Storyboard.TargetProperty="Height"
+                             Duration="0:0:0.2"
+                             From="{Binding ElementName=basement, Path=Height}"
+                             To="0"/>
+        </Storyboard>
+    </Border.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <Border x:Name="header"
+                Panel.ZIndex="0"
+                Grid.RowSpan="2"
+                VerticalAlignment="Top"
+                BorderThickness="1"
+                CornerRadius="0,0,1.5,1.5"
+                Height="10"
+                BorderBrush="{Binding ElementName=header, Path=Background}"
+                Background="{StaticResource DarkGreenColor}"/>
+
+        <!--Content-->
+        <Grid Grid.Row="1"
+              Panel.ZIndex="1"
+              x:Name="content">
+            <TextBlock Text="Project"
+                       FontSize="15"
+                       FontWeight="Bold"
+                       VerticalAlignment="Top"
+                       Margin="20"/>
+        </Grid>
+
+        <!--Basement-->
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid Name="basement"
+                  Height="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel
+                    Margin="20,0,0,0">
+                    <TextBlock Text="PM"
+                               Margin="0,10,0,10"/>
+                    <TextBlock Text="Team"/>
+                </StackPanel>
+
+                <StackPanel
+                    Grid.Column="1"
+                    Margin="20,0,0,0">
+                    <TextBlock Text="Customer Info"
+                               Margin="0,10,0,10"/>
+                </StackPanel>
+
+            </Grid>
+
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Bottom"
+                        HorizontalAlignment="Right"
+                        Grid.Row="1"
+                        Margin="0,0,30,0">
+                <TextBlock Text="DateStart"
+                           Margin="10"/>
+                <TextBlock Text="Deadline"
+                           Margin="10"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+
+</Border>

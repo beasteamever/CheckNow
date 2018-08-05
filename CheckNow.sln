@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27703.2000
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckNow", "CheckNow\CheckNow.csproj", "{DE3B0643-8C55-4D5A-894A-32ACFAE8E98D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckNowTests", "CheckNowTests\CheckNowTests.csproj", "{EABF2DBE-03F3-4BE8-965D-C850562643C4}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SweetControls", "SweetControls\SweetControls.csproj", "{4CDCCD53-A250-4D6F-AC43-5F646F92D664}"
 EndProject
 Global

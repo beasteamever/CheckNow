@@ -1,0 +1,79 @@
+﻿<Button x:Class="SweetControls.SweetButton"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d" Click="Button_Click"
+        Background="White" x:Name="main"
+        BorderBrush="Black"
+        d:DesignHeight="450" d:DesignWidth="800">
+    <Button.Style>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <ContentPresenter/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Button.Style>
+
+    <Button.Resources>
+        <Storyboard x:Key="SqueezeAnimation">
+            <DoubleAnimation Storyboard.TargetName="border"
+                             Storyboard.TargetProperty="Width"
+                             DecelerationRatio="0.6"
+                             Duration="0:0:0.5"
+                             From="{Binding ElementName=border, Path=Width}"
+                             Completed="SqueezeAnimation_Completed"/>
+        </Storyboard>
+        <Storyboard x:Key="ToIdleAnimation">
+            <DoubleAnimation Storyboard.TargetName="border"
+                             Storyboard.TargetProperty="Width"
+                             DecelerationRatio="0.6"
+                             Duration="0:0:0.5"
+                             From="{Binding ElementName=border, Path=Width}"
+                             To="{Binding ElementName=main, Path=Width}"
+                             Completed="SqueezeAnimation_Completed"/>
+        </Storyboard>
+    </Button.Resources>
+
+    <Grid>
+        <!--Deleted-->
+        <!--Background="{Binding Path=Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}}"-->
+        <Border BorderBrush="{Binding Path=BorderBrush, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}}"
+                BorderThickness="{Binding Path=BorderThickness, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}}"
+                CornerRadius="{Binding Path=CornerRadius, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}}"
+                x:Name="border">
+            <TextBlock Text="{Binding Path=Text, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}}"
+                       Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}}"
+                       FontSize="{Binding Path=FontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}}"
+                       FontFamily="{Binding Path=FontFamily, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}}"
+                       FontStretch="{Binding Path=FontStretch, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}}"
+                       FontStyle="{Binding Path=FontStyle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}}"
+                       FontWeight="{Binding Path=FontWeight, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}}"
+                       HorizontalAlignment="{Binding Path=HorizontalContentAlignment, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}}"
+                       VerticalAlignment="{Binding Path=VerticalContentAlignment, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}}"
+                       x:Name="text"/>
+        </Border>
+        <Ellipse Width="{Binding Path=SqueezeSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}}"
+                 Height="{Binding Path=Height, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}}"
+                 Stroke="{Binding Path=BorderBrush, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}}"
+                 StrokeThickness="{Binding Path=BorderThickness, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}}"
+                 Visibility="Collapsed"
+                 StrokeDashCap="Round"
+                 x:Name="ellipse"
+                 RenderTransformOrigin="0.5,0.5">
+            <Ellipse.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                    <SkewTransform AngleY="0" AngleX="0"/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Ellipse.RenderTransform>
+        </Ellipse>
+    </Grid>
+</Button>

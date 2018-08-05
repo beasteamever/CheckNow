@@ -1,0 +1,108 @@
+﻿<Window x:Class="CheckNow.Views.LogInViewWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sweet="clr-namespace:SweetControls;assembly=SweetControls"
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+        Background="Black" x:Name="main"
+        MaxWidth="390" MaxHeight="549"
+        MinWidth="390" MinHeight="549"
+        Width="390" Height="549"
+        Title="LogInViewWindow">
+    <Window.Resources>
+        <Style TargetType="{x:Type sweet:HeaderTextBox}">
+            <Setter Property="FontFamilyHeader" Value="Courier New"/>
+            <Setter Property="ForegroundHeader" Value="Gray"/>
+            <Setter Property="CaretBrush" Value="White"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="ResizeHeaderFontSize" Value="10"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+        <Storyboard x:Key="ToPass">
+            <DoubleAnimation Storyboard.TargetName="Line"
+                             Storyboard.TargetProperty="StrokeDashOffset"
+                             From="{Binding ElementName=Line, Path=StrokeDashOffset}"
+                             Duration="0:0:0.6"
+                             DecelerationRatio="0.6"
+                             To="-365">
+            </DoubleAnimation>
+        </Storyboard>
+        <Storyboard x:Key="ToLog">
+            <DoubleAnimation Storyboard.TargetName="Line"
+                             Storyboard.TargetProperty="StrokeDashOffset"
+                             From="{Binding ElementName=Line, Path=StrokeDashOffset}"
+                             Duration="0:0:0.6"
+                             DecelerationRatio="0.6"
+                             To="0"/>
+        </Storyboard>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Sign In"
+                   Foreground="White"
+                   HorizontalAlignment="Center"
+                   FontSize="48"
+                   Margin="0,81,0,0"
+                   FontFamily="Roboto"
+                   FontWeight="Light"/>
+
+        <StackPanel Grid.Row="1"
+                    Width="275"
+                    Margin="0,50,0,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top">
+            <sweet:HeaderTextBox TextHeader="User Name"
+                                 Height="30"
+                                 Width="270"
+                                 GotFocus="HeaderTextBox_GotFocus"/>
+
+            <Grid Margin="0,7,0,0">
+                <sweet:HeaderTextBox TextHeader="Password"
+                                     Height="30"
+                                     Width="270"
+                                     Margin="0,20,0,5"
+                                     IsPasswordText="True"
+                                     GotFocus="HeaderTextBox_GotFocus_1"/>
+
+                <Path x:Name="Line"
+                      Width="275"
+                      Height="62"
+                      StrokeThickness="1"
+                      Stroke="WhiteSmoke"
+                      StrokeDashOffset="0"
+                      StrokeStartLineCap="Round"
+                      StrokeEndLineCap="Round"
+                      Data="M0,0C0,0,150,0,240,0C250,0,270,0,270,20C270,20,270,25,270,30C270,30,270,50,250,50C240,50,150,50,0,50" Stretch="Fill">
+                    <Path.StrokeDashArray>
+                        <System:Double>245</System:Double>
+                        <System:Double>1000</System:Double>
+                    </Path.StrokeDashArray>
+                </Path>
+            </Grid>
+        </StackPanel>
+        <sweet:SweetButton Grid.Row="2"
+                           HorizontalAlignment="Center"
+                           Width="149"
+                           Height="43"
+                           BorderBrush="White"
+                           CornerRadius="22"
+                           Text="Sign In"
+                           FontFamily="Roboto"
+                           FontSize="16"
+                           VerticalContentAlignment="Center"
+                           HorizontalContentAlignment="Center"
+                           Margin="0,0,0,130"
+                           Background="Transparent"
+                           Foreground="White"
+                           SqueezeSize="43"
+                           x:Name="button"/>
+    </Grid>
+</Window>

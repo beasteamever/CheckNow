@@ -16,7 +16,6 @@ namespace SweetControls
         private static readonly DependencyProperty CornerRadiusProperty;
         private static readonly DependencyProperty TextProperty;
         private static readonly DependencyProperty SqueezeSizeProperty;
-        public static readonly DependencyProperty ErrorStringProperty;
 
         static SweetButton()
         {
@@ -33,11 +32,46 @@ namespace SweetControls
         private double _ellipseLenght;
         private Storyboard _loadingAnimation;
 
+        protected override void OnClick()
+        {
+            base.OnClick();
+
+            if (!IsLoading && SqueezeSize != 0.0)
+            {
+                State = ButtonState.Loading;
+                text.Visibility = Visibility.Collapsed;
+                var anim = this.FindResource("SqueezeAnimation") as Storyboard;
+                this.BeginStoryboard(anim);
+            }
+        }
+
+        private void SqueezeAnimation_Completed(object sender, EventArgs e)
+        {
+            _loadingAnimation = new Storyboard();
+            var animation = new DoubleAnimation()
+            {
+                From = 0,
+                To = _ellipseLenght * 2,
+                Duration = new Duration(TimeSpan.FromSeconds(1.5)),
+                AccelerationRatio = 0.3,
+                DecelerationRatio = 0.5,
+                RepeatBehavior = RepeatBehavior.Forever
+            };
+
+            Storyboard.SetTarget(animation, ellipse);
+            Storyboard.SetTargetProperty(animation, new PropertyPath(Ellipse.StrokeDashOffsetProperty));
+
+            _loadingAnimation.Children.Add(animation);
+            _loadingAnimation.Begin(ellipse, true);
+            IsLoading = true;
+        }
+
         public CornerRadius CornerRadius
         {
             get => (CornerRadius)GetValue(CornerRadiusProperty);
             set => SetValue(CornerRadiusProperty, value);
         }
+
         public string Text
         {
             get => GetValue(TextProperty).ToString();
@@ -50,16 +84,16 @@ namespace SweetControls
             set;
         }
 
-        public new Brush Background
-        {
-            get => border.Background;
-            set => border.Background = value;
-        }
-
         public double SqueezeSize
         {
             get => (double)GetValue(SqueezeSizeProperty);
             set => SetValue(SqueezeSizeProperty, value);
+        }
+
+        public ButtonState State
+        {
+            get;
+            private set;
         }
 
         public SweetButton()
@@ -69,75 +103,60 @@ namespace SweetControls
             this.Loaded += (s, args) =>
             {
                 var squeezeStoryboard = this.FindResource("SqueezeAnimation") as Storyboard;
-                var squeezqAnimation = squeezeStoryboard.Children[0] as DoubleAnimation;
-                squeezqAnimation.To = SqueezeSize;
+                ((DoubleAnimation)squeezeStoryboard.Children[0]).To = SqueezeSize;
+
+                var toIdleAnimation = this.FindResource("ToIdleAnimation") as Storyboard;
+                ((DoubleAnimation)toIdleAnimation.Children[0]).To = border.ActualWidth;
 
                 border.Width = border.ActualWidth;
 
                 _ellipseLenght = Math.PI * SqueezeSize;
                 ellipse.StrokeDashArray = new DoubleCollection() { _ellipseLenght, _ellipseLenght };
+
+                checkIcon.Width = SqueezeSize - 20;
+                checkIcon.Height = ellipse.Height - 20;
             };
         }
 
-        public void StopLoadAnimation(ButtonState state)
+        public void StopLoadAnimation(ButtonState nextState)
         {
             if (!IsLoading)
                 return;
 
-            // TODO Stop loading animation
+            State = nextState;
+            var anim = _loadingAnimation.Children[0] as DoubleAnimation;
+            double animSpeed = _ellipseLenght * 2 / 1.5;
+            double animTime = (_ellipseLenght * 2 - ellipse.StrokeDashOffset) / animSpeed;
 
-            switch (state)
+            _loadingAnimation.Pause(ellipse);
+
+            anim.RepeatBehavior = new RepeatBehavior(1);
+            anim.From = ellipse.StrokeDashOffset;
+            anim.Duration = new Duration(TimeSpan.FromSeconds(animTime));
+
+            anim.Completed += (s, a) =>
             {
-                case ButtonState.Idle:
-                    BeginStoryboard(FindResource("ToIdleAnimation") as Storyboard, HandoffBehavior.SnapshotAndReplace);
-                    ellipse.Visibility = Visibility.Collapsed;
-                    border.Visibility = Visibility.Visible;
-                    break;
-                case ButtonState.Loaded:
-                    break;
-            }
+                switch (nextState)
+                {
+                    case ButtonState.Idle:
+                        BeginStoryboard(FindResource("ToIdleAnimation") as Storyboard, HandoffBehavior.Compose);
+                        text.Visibility = Visibility.Visible;
+                        break;
+                    case ButtonState.Loaded:
+                        BeginStoryboard(FindResource("ShowContentAnimation") as Storyboard, HandoffBehavior.Compose);
+                        break;
+                }
+            };
 
+            _loadingAnimation.Begin(ellipse, true);
 
             IsLoading = false;
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            if (!IsLoading && SqueezeSize != 0.0)
-            {
-                IsLoading = true;
-                text.Visibility = Visibility.Collapsed;
-                var anim = this.FindResource("SqueezeAnimation") as Storyboard;
-                this.BeginStoryboard(anim);
-            }
-
-        }
-
-        private void SqueezeAnimation_Completed(object sender, EventArgs e)
-        {
-            ellipse.Visibility = Visibility.Visible;
-            border.Visibility = Visibility.Hidden;
-
-            _loadingAnimation = new Storyboard();
-            var animation = new DoubleAnimation()
-            {
-                From = 0,
-                To = _ellipseLenght * 2,
-                Duration = new Duration(TimeSpan.FromSeconds(1.5)),
-                AccelerationRatio = 0.3,
-                DecelerationRatio = 0.5,
-                RepeatBehavior = RepeatBehavior.Forever
-            };
-            _loadingAnimation.Children.Add(animation);
-            Storyboard.SetTarget(animation, ellipse);
-            Storyboard.SetTargetProperty(animation, new PropertyPath(Ellipse.StrokeDashOffsetProperty));
-            this.BeginStoryboard(_loadingAnimation);
         }
 
         public enum ButtonState
         {
             Idle,
-            loading,
+            Loading,
             Loaded
         }
     }

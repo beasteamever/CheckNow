@@ -20,6 +20,31 @@
             <Setter Property="ResizeHeaderFontSize" Value="10"/>
             <Setter Property="FontSize" Value="16"/>
         </Style>
+
+        <Storyboard x:Key="ToNonRemeberSateAnimation">
+            <DoubleAnimation Storyboard.TargetName="PersonNameEllipse"
+                             Storyboard.TargetProperty="Width"
+                             Duration="0:0:0.5"
+                             To="800"/>
+            <DoubleAnimation Storyboard.TargetName="PersonNameEllipse"
+                             Storyboard.TargetProperty="Height"
+                             Duration="0:0:0.5"
+                             To="800"/>
+
+            <ColorAnimation Storyboard.TargetName="PersonNameForeground"
+                            Storyboard.TargetProperty="Color"
+                            Duration="0:0:0.2"
+                            To="White"/>
+        </Storyboard>
+
+        <Storyboard x:Key="ToNonRemeberSateShowAnimation">
+
+            <ColorAnimation Storyboard.TargetName="PersonNameEllipseFill"
+                            Storyboard.TargetProperty="Color"
+                            Duration="0:0:0.2"
+                            To="Transparent"/>
+        </Storyboard>
+
         <Storyboard x:Key="ToPass">
             <DoubleAnimation Storyboard.TargetName="Line"
                              Storyboard.TargetProperty="StrokeDashOffset"
@@ -29,6 +54,7 @@
                              To="-365">
             </DoubleAnimation>
         </Storyboard>
+
         <Storyboard x:Key="ToLog">
             <DoubleAnimation Storyboard.TargetName="Line"
                              Storyboard.TargetProperty="StrokeDashOffset"
@@ -37,42 +63,159 @@
                              DecelerationRatio="0.6"
                              To="0"/>
         </Storyboard>
+
+        <Storyboard x:Key="ButtonMouseEnter" Storyboard.TargetName="button">
+            <ColorAnimation Storyboard.TargetProperty="Background.Color"
+                                                Duration="0:0:0.1"
+                                                From="Transparent"
+                                                To="White"/>
+            <ColorAnimation Storyboard.TargetProperty="Foreground.Color"
+                                                Duration="0:0:0.1"
+                                                From="White"
+                                                To="Black"/>
+            <ColorAnimation Storyboard.TargetProperty="BorderBrush.Color"
+                                                Duration="0:0:0.1"
+                                                From="White"
+                                                To="Black"/>
+        </Storyboard>
+
+        <Storyboard x:Key="ButtonMouseLeave" Storyboard.TargetName="button">
+            <ColorAnimation Storyboard.TargetProperty="Background.Color"
+                                                Duration="0:0:0.1"
+                                                From="White"
+                                                To="Transparent"/>
+            <ColorAnimation Storyboard.TargetProperty="Foreground.Color"
+                                                Duration="0:0:0.1"
+                                                From="Transparent"
+                                                To="White"/>
+            <ColorAnimation Storyboard.TargetProperty="BorderBrush.Color"
+                                                Duration="0:0:0.1"
+                                                From="Black"
+                                                To="White"/>
+        </Storyboard>
     </Window.Resources>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition/>
-            <RowDefinition Height="auto"/>
-        </Grid.RowDefinitions>
+    <Grid Margin="-200,-200,-200,-200">
+        <Grid Panel.ZIndex="2"
+              Margin="0,-158,0,0"
+              Visibility="Collapsed"
+              x:Name="PersonNameContainer"
+              MouseLeftButtonDown="PersonName_MouseLeftButtonDown">
 
-        <TextBlock Text="Sign In"
+            <Grid.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetName="PersonNameEllipseFill"
+                                                    Storyboard.TargetProperty="Color"
+                                                    Duration="0:0:0.2"
+                                                    To="White"/>
+                                <ColorAnimation Storyboard.TargetName="PersonNameEllipseStroke"
+                                                    Storyboard.TargetProperty="Color"
+                                                    Duration="0:0:0.2"
+                                                    To="Black"/>
+                                <ColorAnimation Storyboard.TargetName="PersonNameForeground"
+                                                    Storyboard.TargetProperty="Color"
+                                                    Duration="0:0:0.2"
+                                                    To="Black"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetName="PersonNameEllipseFill"
+                                                    Storyboard.TargetProperty="Color"
+                                                    Duration="0:0:0.2"
+                                                    To="Black"/>
+                                <ColorAnimation Storyboard.TargetName="PersonNameEllipseStroke"
+                                                    Storyboard.TargetProperty="Color"
+                                                    Duration="0:0:0.2"
+                                                    To="White"/>
+                                <ColorAnimation Storyboard.TargetName="PersonNameForeground"
+                                                    Storyboard.TargetProperty="Color"
+                                                    Duration="0:0:0.2"
+                                                    To="White"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Grid.Triggers>
+
+            <Ellipse Width="80"
+                     Height="80"
+                     x:Name="PersonNameEllipse">
+                <Ellipse.Fill>
+                    <SolidColorBrush x:Name="PersonNameEllipseFill" Color="Black"/>
+                </Ellipse.Fill>
+                <Ellipse.Stroke>
+                    <SolidColorBrush x:Name="PersonNameEllipseStroke" Color="White"/>
+                </Ellipse.Stroke>
+            </Ellipse>
+
+            <TextBlock Text="PA"
+                           FontSize="25"
+                           FontWeight="Bold"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           x:Name="PersonName">
+                <TextBlock.Foreground>
+                    <SolidColorBrush x:Name="PersonNameForeground" Color="White"/>
+                </TextBlock.Foreground>
+            </TextBlock>
+        </Grid>
+
+        <Grid Width="382"
+              Height="519">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Ellipse Width="180"
+                     Height="180"
+                     Margin="0,10,0,0"
+                     x:Name="PersonImageEllipse"
+                     Visibility="Collapsed">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="/CheckNow;component/person.jpg"/>
+                </Ellipse.Fill>
+            </Ellipse>
+
+            <TextBlock Text="Sign In"
                    Foreground="White"
                    HorizontalAlignment="Center"
                    FontSize="48"
                    Margin="0,81,0,0"
                    FontFamily="Roboto"
-                   FontWeight="Light"/>
+                   FontWeight="Light"
+                   x:Name="Header"/>
 
-        <StackPanel Grid.Row="1"
+            <StackPanel Grid.Row="1"
                     Width="275"
                     Margin="0,50,0,0"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top">
-            <sweet:HeaderTextBox TextHeader="User Name"
+                <sweet:HeaderTextBox TextHeader="User Name"
                                  Height="30"
                                  Width="270"
+                                 x:Name="Log"
                                  GotFocus="HeaderTextBox_GotFocus"/>
 
-            <Grid Margin="0,7,0,0">
-                <sweet:HeaderTextBox TextHeader="Password"
+                <Grid Margin="0,7,0,0">
+                    <sweet:HeaderTextBox TextHeader="Password"
                                      Height="30"
                                      Width="270"
                                      Margin="0,20,0,5"
                                      IsPasswordText="True"
+                                     x:Name="Password"
                                      GotFocus="HeaderTextBox_GotFocus_1"/>
 
-                <Path x:Name="Line"
+                    <Path x:Name="Line"
                       Width="275"
                       Height="62"
                       StrokeThickness="1"
@@ -81,14 +224,15 @@
                       StrokeStartLineCap="Round"
                       StrokeEndLineCap="Round"
                       Data="M0,0C0,0,150,0,240,0C250,0,270,0,270,20C270,20,270,25,270,30C270,30,270,50,250,50C240,50,150,50,0,50" Stretch="Fill">
-                    <Path.StrokeDashArray>
-                        <System:Double>245</System:Double>
-                        <System:Double>1000</System:Double>
-                    </Path.StrokeDashArray>
-                </Path>
-            </Grid>
-        </StackPanel>
-        <sweet:SweetButton Grid.Row="2"
+                        <Path.StrokeDashArray>
+                            <System:Double>245</System:Double>
+                            <System:Double>1000</System:Double>
+                        </Path.StrokeDashArray>
+                    </Path>
+                </Grid>
+            </StackPanel>
+
+            <sweet:SweetButton Grid.Row="2"
                            HorizontalAlignment="Center"
                            Width="149"
                            Height="43"
@@ -100,9 +244,21 @@
                            VerticalContentAlignment="Center"
                            HorizontalContentAlignment="Center"
                            Margin="0,0,0,130"
-                           Background="Transparent"
                            Foreground="White"
                            SqueezeSize="43"
-                           x:Name="button"/>
+                           x:Name="button"
+                           MouseEnter="SweetButton_MouseEnter"
+                           MouseLeave="SweetButton_MouseLeave"
+                           Background="Transparent"
+                           Click="SweetButton_Click">
+            </sweet:SweetButton>
+
+            <TextBlock Grid.Row="2"
+                   Text="*ERROR STRING"
+                   Foreground="#BDFFBD"
+                   VerticalAlignment="Bottom"
+                   HorizontalAlignment="Center"
+                   Margin="0,0,0,50"/>
+        </Grid>
     </Grid>
 </Window>
